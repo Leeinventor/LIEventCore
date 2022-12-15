@@ -1,0 +1,16 @@
+PODS:
+  - LIEventCore (0.1.0)
+
+DEPENDENCIES:
+  - LIEventCore (from `../`)
+
+EXTERNAL SOURCES:
+  LIEventCore:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LIEventCore: 7ffd40695a070262970c74a43b13dcc2d7805d3c
+
+PODFILE CHECKSUM: e040e6c877db1a829031faf4afa06d8c3ae28a77
+
+COCOAPODS: 1.9.0
