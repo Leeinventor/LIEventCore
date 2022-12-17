@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "LIBaseBehavior.h"
 #import "LIBaseInstruction.h"
+#import "LIEventDefinition.h"
 NS_ASSUME_NONNULL_BEGIN
 ///强制结束事件通知
 static NSString *LIEventDidForceEnd = @"LIEventDidForceEnd";
@@ -25,10 +26,10 @@ typedef NS_ENUM(NSUInteger, LIEventStatus) {
     LIEventStatusBeCancle
 };
 @interface LIEvent : NSObject
-///指令流
+///指令组
 @property (nonatomic,strong) NSArray<LIBaseInstruction *>*instructions;
-///反馈流
-@property (nonatomic,strong) NSArray<LIBaseBehavior *>*Behaviors;
+///行为组
+@property (nonatomic,strong) NSArray<LIBaseBehavior *>*behaviors;
 ///开始时间
 @property (nonatomic,copy) NSString *startTimestamp;
 ///结束时间

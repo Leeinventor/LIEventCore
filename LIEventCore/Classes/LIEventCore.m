@@ -8,7 +8,6 @@
 #import "LIEventCore.h"
 #import "LITranslateFactory.h"
 @interface LIEventCore()
-@property (nonatomic,weak) id<LIEventDataProvider> provider;
 ///事件过期时间，默认12H
 @property (nonatomic,assign) NSInteger expirationTime;
 ///正在执行的事件
@@ -34,14 +33,15 @@
 ///输入一个指令流
 + (void)inputInstructions:(NSArray <LIBaseInstruction *>*)instructions {
     LIEvent *event = [LITranslateFactory translate:instructions];
-    if (event) {
-        if (event.priority > [LIEventCore currentEvent].priority) {
-            [LIEventCore stopCurrenEvent];
-            [LIEventCore beginEvent:event];
-        } else if (event.priority == [LIEventCore currentEvent].priority) {
-            
-        }
-    }
+    NSLog(@"%@",event);
+//    if (event) {
+//        if (event.priority > [LIEventCore currentEvent].priority) {
+//            [LIEventCore stopCurrenEvent];
+//            [LIEventCore beginEvent:event];
+//        } else if (event.priority == [LIEventCore currentEvent].priority) {
+//
+//        }
+//    }
     
     
 }
@@ -60,10 +60,6 @@
     [core.event forceEnd];
 }
 
-///设置数据提供代理
-+ (void)setDataProvider:(id<LIEventDataProvider>)provider {
-    [LIEventCore manager].provider = provider;
-}
 ///当前正在执行的事件
 + (LIEvent *)currentEvent {
     return [LIEventCore manager].event;

@@ -10,7 +10,7 @@
 @implementation LIEvent
 ///开启事件
 - (void)start {
-    for (LIBaseBehavior *Behavior in self.Behaviors) {
+    for (LIBaseBehavior *Behavior in self.behaviors) {
         if (Behavior.performer && Behavior.performer.runningType == LIRunningTypeReadyToStart) {
             [Behavior.performer start:Behavior];
         }
@@ -18,7 +18,7 @@
     self.status = LIEventStatusDuring;
 }
 - (void)cancle {
-    for (LIBaseBehavior *Behavior in self.Behaviors) {
+    for (LIBaseBehavior *Behavior in self.behaviors) {
         [Behavior.performer cancle:Behavior];
     }
     self.status = LIEventStatusBeCancle;
@@ -26,7 +26,7 @@
 ///结束事件
 - (void)end {
     BOOL isEnd = YES;
-    for (LIBaseBehavior *Behavior in self.Behaviors) {
+    for (LIBaseBehavior *Behavior in self.behaviors) {
         if (Behavior.performer && Behavior.performer.runningType == LIRunningTypeReadyToEnd) {
             [Behavior.performer end:Behavior];
         } else {
@@ -37,7 +37,7 @@
 }
 /// 强制结束事件
 - (void)forceEnd {
-    for (LIBaseBehavior *Behavior in self.Behaviors) {
+    for (LIBaseBehavior *Behavior in self.behaviors) {
         [Behavior.performer end:Behavior];
     }
     self.status = LIEventStatusEnd;

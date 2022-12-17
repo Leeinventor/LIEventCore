@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LIEventRuningProtocol.h"
+#import "LIEventDefinition.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, LIResponder) {
     ///未知响应者
@@ -17,6 +18,7 @@ typedef NS_ENUM(NSUInteger, LIResponder) {
     LIResponderMobile = 2,
 };
 @interface LIBaseBehavior : NSObject
+@property (nonatomic,assign) LIBehaviorNumber behaviorNumber;
 ///响应者
 @property (nonatomic,assign) LIResponder responder;
 ///执行者

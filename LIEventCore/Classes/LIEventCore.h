@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LIEvent.h"
-#import "LIEventDataProvider.h"
+#import "LIEventDefinition.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LIEventCore : NSObject
@@ -17,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)stopCurrenEvent;
 ///当前正在执行的事件
 + (LIEvent *)currentEvent;
-///设置数据提供代理
-+ (void)setDataProvider:(id<LIEventDataProvider>)provider;
 ///设置历史记录时间，默认记录最近十分钟
 + (void)setHistoryEventLast:(NSInteger)time;
 ///历史事件
