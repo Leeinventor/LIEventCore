@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LIEventCore'
-  s.version          = '0.1.1'
-  s.summary          = 'A short description of LIEventCore.'
+  s.version          = '0.2.1'
+  s.summary          = '单个事件初步构建成功'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
