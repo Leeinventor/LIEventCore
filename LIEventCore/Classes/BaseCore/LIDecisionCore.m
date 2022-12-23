@@ -9,9 +9,9 @@
 
 @implementation LIDecisionCore
 ///根据指令获取对应的行为组编码
-+ (NSArray *)getBehaviorNumbers:(LIBaseInstruction *)instruction {
++ (LIDecisionDetail *)getBehaviorNumbers:(LIBaseInstruction *)instruction {
     ///获取决策组
-    NSArray <LIDecision *>* decisions = [LIDecisionCore decisions];
+    NSArray <LIDecision *>* decisions = [LIEventData decisions];
     
     for (LIDecision *decision in decisions) {
         //匹配类型
@@ -41,7 +41,7 @@
                             }
                             ///如果所有的都在范围内就返回当前行为组
                             if (isIn) {
-                                return detail.behaviorNumbers;
+                                return detail;
                             }
                         }
                     }
@@ -49,15 +49,15 @@
             }
         }
     }
-    return @[];
+    return nil;
 }
 ///通过行为编码获取指定的行为
 + (LIBaseBehavior *)getBehaviorWithNumber:(LIBehaviorNumber)number {
     ///在这里通过number从一个数据体里面获取对应的行为个体
-    NSDictionary <NSNumber *,LIBaseBehavior *>* behaviors = [LIDecisionCore behaviors];
-    for (NSNumber *key in behaviors.allKeys) {
-        if (key.integerValue == number) {
-            return behaviors[key];
+    NSArray <LIBaseBehavior *>* behaviors = [LIEventData behaviors];
+    for (LIBaseBehavior *behavior in behaviors) {
+        if (behavior.behaviorNumber == number) {
+            return behavior;
         }
     }
     return nil;
@@ -69,9 +69,9 @@
         return YES;
     } else {
         NSArray *array = [range componentsSeparatedByString:@","];
-        NSInteger first = [[array.firstObject substringWithRange:NSMakeRange(1, [array.firstObject length] - 1)] integerValue];
-        NSInteger last = [array.lastObject integerValue];
-        NSInteger judge = judgeString.integerValue;
+        float first = [[array.firstObject substringWithRange:NSMakeRange(1, [array.firstObject length] - 1)] floatValue];
+        float last = [array.lastObject floatValue];
+        float judge = judgeString.floatValue;
         if ([array.firstObject hasPrefix:@"("] && [array.lastObject hasSuffix:@")"]) {
             if (judge > first && judge < last) {
                 return YES;
@@ -102,43 +102,4 @@
     return NO;
 }
 
-///预存放的映射库
-+ (NSArray <LIDecision *>*)decisions {
-    LIDecision *decision = [[LIDecision alloc] init];
-    decision.type = 1;
-    LIDecisionData *data = [[LIDecisionData alloc] init];
-    data.number = 1001;
-    data.judgeSequencyArray = @[LIDecisionStringWeather,LIDecisionStringIntimacy];
-    LIDecisionDetail *detail1 = [[LIDecisionDetail alloc] init];
-    detail1.judgeString = @[@"(1,2)",@"(3,4)"];
-    detail1.behaviorNumbers = @[@1001001];
-    
-    LIDecisionDetail *detail2 = [[LIDecisionDetail alloc] init];
-    detail2.judgeString = @[@"[2,3)",@"[4,5)"];
-    detail2.behaviorNumbers = @[@1001002];
-    
-    LIDecisionDetail *detail3 = [[LIDecisionDetail alloc] init];
-    detail3.judgeString = @[@"[3,4)",@"[5,6)"];
-    detail3.behaviorNumbers = @[@1001003];
-    data.decisions = @[detail1,detail2,detail3];
-    decision.datas = @[data];
-    return @[decision];
-}
-
-
-///预存放的
-+ (NSDictionary <NSNumber *,LIBaseBehavior *>*)behaviors {
-    LIBaseBehavior *behavior1 = [[LIBaseBehavior alloc] init];
-    behavior1.behaviorNumber = 1001001;
-    
-    LIBaseBehavior *behavior2 = [[LIBaseBehavior alloc] init];
-    behavior2.behaviorNumber = 1001002;
-    
-    LIBaseBehavior *behavior3 = [[LIBaseBehavior alloc] init];
-    behavior3.behaviorNumber = 1001003;
-    return @{@1001001:behavior1,
-             @1001002:behavior2,
-             @1001003:behavior3
-    };
-}
 @end

@@ -6,14 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LIBaseInstruction.h"
-#import "LIDecision.h"
-#import "LIBaseBehavior.h"
+#import "LIEventData.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LIDecisionCore : NSObject
 ///根据指令获取对应的行为组编码
-+ (NSArray *)getBehaviorNumbers:(LIBaseInstruction *)instruction;
++ (LIDecisionDetail *)getBehaviorNumbers:(LIBaseInstruction *)instruction;
 ///通过行为编码获取指定的行为
 + (LIBaseBehavior *)getBehaviorWithNumber:(LIBehaviorNumber)number;
 ///判断数据是否在指定的范围内

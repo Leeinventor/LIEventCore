@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LIBaseInstruction.h"
+#import "LIEventData.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LIInstructionCore : NSObject

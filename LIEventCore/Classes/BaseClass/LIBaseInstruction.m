@@ -6,7 +6,7 @@
 //
 
 #import "LIBaseInstruction.h"
-#import "LIInstructionDependency.h"
+#import "LIEventData.h"
 @interface LIBaseInstruction()
 @property (nonatomic,strong) NSMutableDictionary *dependencyDict;
 @end
@@ -18,7 +18,7 @@
     if (_dependencyDict.allKeys.count != 0) {
         return _dependencyDict;
     }
-    for (LIInstructionDependency *dependency in [LIBaseInstruction dependencys]) {
+    for (LIInstructionDependency *dependency in [LIEventData dependencys]) {
         if (dependency.type == self.type) {
             for (LIInstructionDependencyData *data in dependency.datas) {
                 if (data.number == self.number) {
@@ -30,6 +30,9 @@
                         } else if ([str isEqualToString:LIDecisionStringIntimacy]){
                             ///是其他参数的时候就填入其他的参数
                             _dependencyDict[str] = @"4.5";
+                        } else if ([str isEqualToString:LIDecisionStringProbability]) {
+                            NSInteger randomNumber = arc4random()%100;
+                            _dependencyDict[str] = [NSString stringWithFormat:@"%f",(float)randomNumber/100.f];
                         }
                     }
                 }
@@ -39,14 +42,9 @@
     return _dependencyDict;
 }
 
-///从远端获取到的指令映射库
-+ (NSArray <LIInstructionDependency *>*)dependencys {
-    LIInstructionDependency *dependency = [[LIInstructionDependency alloc] init];
-    dependency.type = 1;
-    LIInstructionDependencyData *data = [[LIInstructionDependencyData alloc] init];
-    data.number = 1001;
-    data.dependencys = @[LIDecisionStringWeather,LIDecisionStringIntimacy];
-    dependency.datas = @[data];
-    return @[dependency];
+- (NSString *)description {
+    return [NSString stringWithFormat:@"/instructionType:%d\nnumber:%d\ndependencyData:%@",self.type,self.number,[self dependencyData]];
 }
+
+
 @end

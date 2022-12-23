@@ -21,14 +21,17 @@ typedef NS_ENUM(NSUInteger, LIRunningType) {
     LIRunningTypeEnd
 };
 @class LIBaseBehavior;
+@class LIEvent;
 @protocol LIEventRuningProtocol <NSObject>
 @required
 ///开始
-- (void)start:(LIBaseBehavior *)Behavior;
+- (void)startEvent:(LIEvent *)event behavior:(LIBaseBehavior *)behavior;
 ///取消
-- (void)cancle:(LIBaseBehavior *)Behavior;
+- (void)cancleEvent:(LIEvent *)event behavior:(LIBaseBehavior *)behavior;
 ///结束
-- (void)end:(LIBaseBehavior *)Behavior;
+- (void)endEvent:(LIEvent *)event behavior:(LIBaseBehavior *)behavior;
+///强制停止
+- (void)forceEndEvent:(LIEvent *)event behavior:(LIBaseBehavior *)behavior;
 /// 运行状态
 - (LIRunningType)runningType;
 @end

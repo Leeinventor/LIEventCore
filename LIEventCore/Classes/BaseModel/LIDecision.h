@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///“[1,2]”，意思就是大于等于1小于等于2之间
 ///“1”,意思即为等于1
 @property (nonatomic,copy) NSArray<LIDecisionJudgeString *> *judgeString;
+///优先级 数字从小到大，数字越大优先级越高
+@property (nonatomic,assign) NSInteger priority;
 ///行为编号组
 @property (nonatomic,copy) NSArray * behaviorNumbers;
 @end

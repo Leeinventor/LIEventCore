@@ -8,17 +8,22 @@
 #import <Foundation/Foundation.h>
 #import "LIEvent.h"
 #import "LIEventDefinition.h"
+#import "LIEventRuningProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LIEventCore : NSObject
 ///输入一个指令流
 + (void)inputInstructions:(NSArray <LIBaseInstruction *>*)instructions;
+///设置执行者
++ (void)setPerformers:(NSMapTable <NSNumber*,id<LIEventRuningProtocol>>*)performers;
+///执行者们
++ (NSMapTable <NSNumber*,id<LIEventRuningProtocol>>*)performers;
+///执行者结束执行
++ (void)performerDidFinishRunning:(id <LIEventRuningProtocol>)performer;
 ///停止执行当前事件
-+ (void)stopCurrenEvent;
-///当前正在执行的事件
-+ (LIEvent *)currentEvent;
-///设置历史记录时间，默认记录最近十分钟
-+ (void)setHistoryEventLast:(NSInteger)time;
++ (void)stopCurrenEvents;
+/// 正在执行的事件们
++ (NSArray <LIEvent *>*)currentEvents;
 ///历史事件
 + (NSArray <LIEvent *>*)historyEvents;
 

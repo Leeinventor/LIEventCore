@@ -10,8 +10,7 @@
 #import "LIBaseInstruction.h"
 #import "LIEventDefinition.h"
 NS_ASSUME_NONNULL_BEGIN
-///强制结束事件通知
-static NSString *LIEventDidForceEnd = @"LIEventDidForceEnd";
+
 ///事件状态
 typedef NS_ENUM(NSUInteger, LIEventStatus) {
     ///未知状态
@@ -46,6 +45,10 @@ typedef NS_ENUM(NSUInteger, LIEventStatus) {
 - (void)end;
 ///强制结束事件
 - (void)forceEnd;
+///可以执行
+- (BOOL)canRun;
+///是否执行结束
+- (BOOL)isFinish;
 @end
 
 NS_ASSUME_NONNULL_END

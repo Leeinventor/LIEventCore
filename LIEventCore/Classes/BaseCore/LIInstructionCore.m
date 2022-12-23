@@ -14,7 +14,7 @@
     for (LIBaseInstruction *instruction in instructions) {
         ///默认不合法
         BOOL unLegal = YES;
-        for (LIBaseInstruction *legalInstruction in [LIInstructionCore instructions]) {
+        for (LIBaseInstruction *legalInstruction in [LIEventData instructions]) {
             ///在可用的指令集中存在一致的，那这个指令就合法
             if (instruction.type == legalInstruction.type && instruction.number == legalInstruction.number) {
                 unLegal = NO;
@@ -27,11 +27,5 @@
     }
     return NO;
 }
-///可以用的指令
-+ (NSArray <LIBaseInstruction *>*)instructions {
-    LIBaseInstruction *instruction = [[LIBaseInstruction alloc] init];
-    instruction.type = 1;
-    instruction.number = 1001;
-    return @[instruction];
-}
+
 @end
